@@ -1,0 +1,6 @@
+com.ly.fn.motanx.api.cluster.loadbalance.RandomLoadBalance
+com.ly.fn.motanx.api.cluster.loadbalance.ConsistentHashLoadBalance
+com.ly.fn.motanx.api.cluster.loadbalance.ActiveWeightLoadBalance
+com.ly.fn.motanx.api.cluster.loadbalance.RoundRobinLoadBalance
+com.ly.fn.motanx.api.cluster.loadbalance.LocalFirstLoadBalance
+com.ly.fn.motanx.api.cluster.loadbalance.ConfigurableWeightLoadBalance

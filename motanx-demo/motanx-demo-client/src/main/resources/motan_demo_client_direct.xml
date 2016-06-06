@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:motanx="http://fn.ly.com/schema/motanx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://fn.ly.com/schema/motanx http://fn.ly.com/schema/motanx.xsd">
+	<import resource="classpath*:spring/configloader.xml" />
+	<!-- 注册中心配置 -->
+	<motanx:registry regProtocol="local" name="motanxDemo" />
+
+	<!-- motan协议配置 -->
+	<motanx:protocol default="true" name="motanx" haStrategy="failover" loadbalance="activeWeight" maxClientConnection="10" minClientConnection="2" />
+
+	<!-- 通用referer基础配置 -->
+	<motanx:basicReferer requestTimeout="200" accessLog="false" retries="2" group="motanx-demo-rpc" module="motanx-demo-rpc" application="myMotanxDemo" protocol="motanx" registry="motanxDemo"
+		id="motanxtestClientBasicConfig" throwException="false" check="true" />
+
+	<!-- 具体referer配置。使用方通过beanid使用服务接口类 -->
+	<motanx:referer id="motanDemoReferer" directUrl="localhost:8002" interface="com.weibo.motan.demo.service.MotanDemoService" connectTimeout="300" requestTimeout="300"
+		basicReferer="motanxtestClientBasicConfig" />
+
+</beans>

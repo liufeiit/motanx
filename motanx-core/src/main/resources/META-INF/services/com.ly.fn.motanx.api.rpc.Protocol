@@ -1,0 +1,2 @@
+com.ly.fn.motanx.api.protocol.injvm.InjvmProtocol
+com.ly.fn.motanx.api.protocol.rpc.DefaultRpcProtocol

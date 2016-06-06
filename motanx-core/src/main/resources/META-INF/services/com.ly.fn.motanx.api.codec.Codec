@@ -1,0 +1,2 @@
+com.ly.fn.motanx.api.protocol.rpc.DefaultRpcCodec
+com.ly.fn.motanx.api.protocol.rpc.CompressRpcCodec

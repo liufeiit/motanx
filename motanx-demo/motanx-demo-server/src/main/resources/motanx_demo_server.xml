@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:motanx="http://fn.ly.com/schema/motanx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://fn.ly.com/schema/motanx http://fn.ly.com/schema/motanx.xsd">
+
+	<motanx:service-exporter/>
+	
+	<!-- 业务具体实现类 -->
+	<bean id="motanxDemoServiceImpl" class="com.ly.fn.motanx.demo.server.MotanDemoServiceImpl" />
+
+	<!-- 注册中心配置 使用不同注册中心需要依赖对应的jar包。如果不使用注册中心，可以把check属性改为false，忽略注册失败。 -->
+	<!--<motanx:registry regProtocol="local" name="registry" /> -->
+	<!--<motanx:registry regProtocol="consul" name="registry" address="127.0.0.1:8500"/> -->
+	<motanx:registry regProtocol="zookeeper" name="registry" address="10.14.87.144:2181" />
+
+	<!-- 协议配置。为防止多个业务配置冲突，推荐使用id表示具体协议。 -->
+	<motanx:protocol id="demomotanx" default="true" name="motanx" maxServerConnection="80000" maxContentLength="1048576" maxWorkerThread="800" minWorkerThread="20" />
+
+	<!-- 通用配置，多个rpc服务使用相同的基础配置. group和module定义具体的服务池。export格式为“protocol id:提供服务的端口” -->
+	<motanx:basicService export="demomotanx:8002" group="motanx-demo-rpc" accessLog="false" shareChannel="true" module="motanx-demo-rpc" application="myMotanxDemo" registry="registry"
+		id="serviceBasicConfig" />
+
+	<!-- 具体rpc服务配置，声明实现的接口类。 
+	<motanx:service interface="com.ly.fn.motanx.demo.service.MotanxDemoService" ref="motanxDemoServiceImpl" export="demomotanx:9103" 
+					basicService="serviceBasicConfig">
+	</motanx:service>
+	
+	<motanx:service interface="com.ly.fn.motanx.demo.service.MotanxDemoService" ref="motanxDemoServiceImpl" export="demomotanx:9104" 
+					basicService="serviceBasicConfig">
+	</motanx:service>
+	-->
+</beans>

@@ -1,0 +1,2 @@
+com.ly.fn.motanx.api.cluster.ha.FailoverHaStrategy
+com.ly.fn.motanx.api.cluster.ha.FailfastHaStrategy

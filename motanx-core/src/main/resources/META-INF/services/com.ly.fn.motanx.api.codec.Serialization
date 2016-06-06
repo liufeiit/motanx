@@ -1,0 +1,2 @@
+com.ly.fn.motanx.api.serialize.Hessian2Serialization
+com.ly.fn.motanx.api.serialize.FastJsonSerialization
